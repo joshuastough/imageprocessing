@@ -1,5 +1,5 @@
 ## imageprocessing
-### [Joshua Stough](http://joshuastough.com), 202X
+### [Joshua Stough](http://joshuastough.com), 202-
 
 ***This book is not at all ready for showtime! Please come back later.***
 
