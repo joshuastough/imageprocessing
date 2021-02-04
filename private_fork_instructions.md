@@ -15,7 +15,7 @@ git clone --bare git@github.com:joshuastough/imageprocessing.git
 2. **Create a new private repository on Github and name it `my_imageprocessing`.**
 > If for some reason you are unable to create a private repo, you can request unlimited private repos as a student by getting the [student pack from Github](https://education.github.com/pack).
 
-3. **Mirror-push your bare clone to your new easytrace repository.**
+3. **Mirror-push your bare clone to your new `my_imageprocessing` repository.**
 > Replace `<your_username>` with your actual Github username in the url below.
 ```
 cd imageprocessing.git/
@@ -28,7 +28,7 @@ cd ..
 rm -rf imageprocessing.git/
 ```
 
-5. **You can now clone your my_imageprocessing repository on your machine (in my case in the workspace folder).**
+5. **You can now clone your `my_imageprocessing` repository on your machine (in my case in the workspace folder).**
 ```
 cd ~/workspace
 git clone git@github.com:<your_username>/my_imageprocessing.git
