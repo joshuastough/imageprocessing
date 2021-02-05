@@ -7,7 +7,7 @@ This repo is public and Github does not allow the creation of private forks for 
 
 The correct way of creating a private fork by duplicating the repo is documented here.
 
-Before doing any of this, you need to add an [ssh key to your github account](https://docs.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account), as you may have done before. Setting this up allows you to interact with github.com through ssh.
+Before doing any of this, you need to add an [ssh key to your github account](https://docs.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account), as you may have done before for gitlab or for other machines. Setting this up allows this particular machine/filesystem to interact with github.com through ssh.
 
 
 1. **Create a bare clone of the repository. (This is temporary and will be removed so just do it wherever.)**
