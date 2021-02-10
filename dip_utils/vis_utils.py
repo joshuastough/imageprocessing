@@ -12,7 +12,7 @@ import numpy as np
 import skimage.color as color
 
 
-def vis_rgb_cube(I, numPoints=5000):
+def vis_rgb_cube(I, numpoints=5000):
     '''
     vis_rgb_cube(I, numPoints=5000): Display RGB color cube for the image I
     '''
@@ -30,9 +30,6 @@ def vis_rgb_cube(I, numPoints=5000):
     colr_func = lambda X: X/255
     if np.max(I) <= 1.0:
         colr_func = lambda X: X # colors must be in [0,1]
-    
-    
-    NUMPOINTS = 5000
 
     fig = plt.figure(figsize=(4,4))
     ax = fig.add_subplot(111, projection='3d')
@@ -41,7 +38,7 @@ def vis_rgb_cube(I, numPoints=5000):
     X = np.stack([I[...,i].ravel() for i in range(3)]).T
 
     # https://numpy.org/doc/stable/reference/random/generated/numpy.random.choice.html
-    randomInds = np.random.choice(np.arange(X.shape[0]), NUMPOINTS, replace=False)
+    randomInds = np.random.choice(np.arange(X.shape[0]), numpoints, replace=False)
 
     # Now plot those pixels in the 3d space.
     ax.scatter(X[randomInds,0], X[randomInds,1], X[randomInds,2], c=colr_func(X[randomInds, :]))
@@ -78,21 +75,26 @@ def vis_hsv_cube(I, numpoints = 5000):
     # https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.choice.html
     randomInds = np.random.choice(X.shape[0], numpoints, replace=False)
 
+    # A function to normalize the color for the purpose of 
+    # coloring scatter points.
+    colr_func = lambda X: X/255
+    if np.max(I) <= 1.0:
+        colr_func = lambda X: X # colors must be in [0,1]
     
     fig = plt.figure(figsize=(4,4))
     ax = fig.add_subplot(111, projection='3d')
     
-    # point colors
-    point_colors = Xrgb[randomInds, :]
-    if point_colors.max() > 1:
-        point_colors = point_colors-point_colors.min()
-        point_colors = point_colors/point_colors.max()
+#     # point colors
+#     point_colors = Xrgb[randomInds, :]
+#     if point_colors.max() > 1:
+#         point_colors = point_colors-point_colors.min()
+#         point_colors = point_colors/point_colors.max()
 
     # Now plot those pixels in the 3d space.
     # depthshade defaults to True. I leave it there cause
     # the colors get all messed up if you put False though.
     ax.scatter(X[randomInds], Y[randomInds], Z[randomInds], 
-               c=point_colors, depthshade=True)
+               c=colr_func(Xrgb[randomInds, :]), depthshade=True)
 
     #Label the axes.
     ax.set_xlabel('H and S')
@@ -123,19 +125,20 @@ def vis_lab_cube(I, numpoints = 5000):
     # https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.choice.html
     randomInds = np.random.choice(np.arange(Xlab.shape[0]), numpoints, replace=False)
 
+    # A function to normalize the color for the purpose of 
+    # coloring scatter points.
+    colr_func = lambda X: X/255
+    if np.max(I) <= 1.0:
+        colr_func = lambda X: X # colors must be in [0,1]
+    
     
     fig = plt.figure(figsize=(4,4))
     ax = fig.add_subplot(111, projection='3d')
-    
-    # point colors
-    point_colors = Xrgb[randomInds, :]
-    if point_colors.max() > 1:
-        point_colors = point_colors-point_colors.min()
-        point_colors = point_colors/point_colors.max()
+
 
     #Now plot those pixels in the 3d space.
     ax.scatter(Xlab[randomInds,1], Xlab[randomInds,2], Xlab[randomInds,0], 
-               c=point_colors, depthshade=True)
+               c=colr_func(Xrgb[randomInds, :]), depthshade=True)
 
     #Label the axes.
     ax.set_xlabel('green->red')
@@ -161,19 +164,19 @@ def vis_ybr_cube(I, numpoints = 5000):
     # https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.choice.html
     randomInds = np.random.choice(np.arange(Xybr.shape[0]), numpoints, replace=False)
 
+    # A function to normalize the color for the purpose of 
+    # coloring scatter points.
+    colr_func = lambda X: X/255
+    if np.max(I) <= 1.0:
+        colr_func = lambda X: X # colors must be in [0,1]
     
     fig = plt.figure(figsize=(4,4))
     ax = fig.add_subplot(111, projection='3d')
     
-    # point colors
-    point_colors = Xrgb[randomInds, :]
-    if point_colors.max() > 1:
-        point_colors = point_colors-point_colors.min()
-        point_colors = point_colors/point_colors.max()
 
     #Now plot those pixels in the 3d space.
     ax.scatter(Xybr[randomInds,0], Xybr[randomInds,1], Xybr[randomInds,2], 
-               c=point_colors, depthshade=True)
+               c=colr_func(Xrgb[randomInds, :]), depthshade=True)
 
     #Label the axes.
     ax.set_xlabel('Lightness (Y)')
