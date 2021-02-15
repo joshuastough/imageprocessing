@@ -12,17 +12,14 @@ import numpy as np
 import skimage.color as color
 
 
-def vis_rgb_cube(I, numpoints=5000):
+def vis_rgb_cube(I, numpoints=5000, fixaxis=True):
     '''
     vis_rgb_cube(I, numPoints=5000): Display RGB color cube for the image I
     '''
     assert len(I.shape)==3 and I.shape[-1]==3, \
            f'visRGB Error: I.shape should be 3-channel, got {I.shape}.'
     
-    if I.dtype == 'float':
-        assert I.min() >= 0 and I.max() <= 1.0, \
-            f'visRGB Error: float I should be in [0,1], got {(I.min(), I.max())}.'
-    else:
+    if I.dtype == 'uint8':
         assert I.min() >= 0 and I.max() <= 255, \
             f'visRGB Error: integer I should be in [0,255], got {(I.min(), I.max())}.'
             
@@ -42,6 +39,10 @@ def vis_rgb_cube(I, numpoints=5000):
 
     # Now plot those pixels in the 3d space.
     ax.scatter(X[randomInds,0], X[randomInds,1], X[randomInds,2], c=colr_func(X[randomInds, :]))
+    if I.dtype == 'uint8' and fixaxis:
+        ax.set_xlim3d(0, 255)
+        ax.set_ylim3d(0, 255)
+        ax.set_zlim3d(0, 255)
 
     # Label the axes.
     ax.set_xlabel('Red')
@@ -184,14 +185,14 @@ def vis_ybr_cube(I, numpoints = 5000):
     ax.set_zlabel('cyan->red (Cr)')
     
     
-def vis_hists(I):
+def vis_hists(I, bins = 256):
     '''
     vis_hists(I): plot the image and its three-channel histograms together.
     '''
     assert len(I.shape)==3 and I.shape[-1]==3, \
            f'vis_hists Error: I.shape should be 3-channel, got {I.shape}.'
     
-    _, allbins = np.histogram(I.ravel(), bins=256)
+    _, allbins = np.histogram(I.ravel(), bins=bins)
     
     f, axarr = plt.subplots(1,2, figsize=(9, 3))
 
