@@ -207,7 +207,8 @@ def vis_hists(I, bins = 256):
     
     
 def vis_pair(I, J, figsize = (8,3), shared = True, 
-             first_title = 'Original', second_title = 'New'):
+             first_title = 'Original', second_title = 'New',
+             show_ticks = True):
     '''
     vis_pair(I, J, figsize = (8,3), shared = True, first_title = 'Original', second_title = 'New'):
     produce a plot of images I and J together. By default takes care of sharing axes to provide
@@ -218,6 +219,11 @@ def vis_pair(I, J, figsize = (8,3), shared = True,
     ax[0].set_title(first_title)
     ax[1].imshow(J)
     ax[1].set_title(second_title)
+    
+    if not show_ticks:
+        [a.axes.get_xaxis().set_visible(False) for a in ax];
+        [a.axes.get_yaxis().set_visible(False) for a in ax];
+    
     plt.tight_layout()
     
     
