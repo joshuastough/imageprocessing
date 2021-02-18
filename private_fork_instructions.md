@@ -51,8 +51,18 @@ upstream        git@github.com:joshuastough/imageprocessing.git (fetch)
 upstream        DISABLE (push)
 ```
 > When you push, do so on origin with `git push origin`
-> When you want to pull changes from `upstream` you can just fetch the remote and rebase on top of your work.
+> When you want to pull changes from `upstream` you can just fetch the upstream.
 ```
 git fetch upstream
+```
+> Incorporating the upstream changes can be kind of a headache given our ipynb code. One option, rebasing 
+```
 git rebase upstream/main
 ```
+> can lead lead to a lot of failed merges. 
+> My recommendation is that you check out only the new matrial I provide. For example, if I tell you I've committed a new module/folder on `Tomography` that you should pull into your codebase, you can use `checkout` to get just that from my repo.
+```
+git fetch upstream
+git checkout upstream/main Tomography
+```
+> then commit and push and you've got my `Tomography` module in your own private fork.
