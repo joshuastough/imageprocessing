@@ -208,16 +208,16 @@ def vis_hists(I, bins = 256):
     
 def vis_pair(I, J, figsize = (8,3), shared = True, 
              first_title = 'Original', second_title = 'New',
-             show_ticks = True):
+             show_ticks = True, **kwargs):
     '''
     vis_pair(I, J, figsize = (8,3), shared = True, first_title = 'Original', second_title = 'New'):
     produce a plot of images I and J together. By default takes care of sharing axes to provide
     a little 1x2 plot without all the coding.
     '''
     f, ax = plt.subplots(1,2, figsize=figsize, sharex = shared, sharey = shared)
-    ax[0].imshow(I)
+    ax[0].imshow(I, **kwargs)
     ax[0].set_title(first_title)
-    ax[1].imshow(J)
+    ax[1].imshow(J, **kwargs)
     ax[1].set_title(second_title)
     
     if not show_ticks:
