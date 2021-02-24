@@ -38,8 +38,8 @@ def build_huff_tree(I):
 #symbol to that sequence.
 def build_huff_encoder(tree, seq = ''):
     retDict = {}
-    if tree.isLeaf():
-        retDict[tree.getSymb()] = seq
+    if tree.is_leaf():
+        retDict[tree.get_symb()] = seq
         return retDict
 
     #Left is 1, right is 0
