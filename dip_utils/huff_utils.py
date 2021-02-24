@@ -78,7 +78,7 @@ def load_huffable_image(I):
     return I
 
 def test_tree_making():
-    lyst = [HuffNode(np.random.randint(0,100), chr(ord('A') + x)) for x in range(10)]
+    lyst = [HuffNode(np.random.randint(0,1000), chr(ord('A') + x)) for x in range(4)]
     print('Before heapify...')
     print('\n'.join(str(item) for item in lyst))
 
