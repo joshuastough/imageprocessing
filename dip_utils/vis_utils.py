@@ -189,19 +189,22 @@ def vis_hists(I, bins = 256):
     '''
     vis_hists(I): plot the image and its three-channel histograms together.
     '''
-    assert len(I.shape)==3 and I.shape[-1]==3, \
-           f'vis_hists Error: I.shape should be 3-channel, got {I.shape}.'
+#     assert len(I.shape)==3 and I.shape[-1]==3, \
+#            f'vis_hists Error: I.shape should be 3-channel, got {I.shape}.'
     
     _, allbins = np.histogram(I.ravel(), bins=bins)
     
     f, axarr = plt.subplots(1,2, figsize=(9, 3))
 
-    axarr[0].imshow(I) #https://matplotlib.org/api/_as_gen/matplotlib.pyplot.imshow.html
+    axarr[0].imshow(I, cmap=[None, 'gray'][len(I.shape)==2]) #https://matplotlib.org/api/_as_gen/matplotlib.pyplot.imshow.html
     axarr[0].set_title('Image')
 
-    axarr[1].hist(I[...,0].ravel(), allbins, alpha = .6, label = 'red', color = 'r');
-    axarr[1].hist(I[...,1].ravel(), allbins, alpha = .6, label = 'green', color = 'g');
-    axarr[1].hist(I[...,2].ravel(), allbins, alpha = .6, label = 'blue', color = 'b');
+    if len(I.shape) == 2:
+        axarr[1].hist(I.ravel(), allbins, alpha = .8, label = 'gray', color = 'k');
+    else:
+        axarr[1].hist(I[...,0].ravel(), allbins, alpha = .6, label = 'red', color = 'r');
+        axarr[1].hist(I[...,1].ravel(), allbins, alpha = .6, label = 'green', color = 'g');
+        axarr[1].hist(I[...,2].ravel(), allbins, alpha = .6, label = 'blue', color = 'b');
     axarr[1].legend(loc = 'upper right');
     plt.tight_layout()
     
