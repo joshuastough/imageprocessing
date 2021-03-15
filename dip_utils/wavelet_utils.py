@@ -9,7 +9,7 @@ import numpy as np
 from scipy.linalg import orth
 
 #See DIP 6.9.
-def makeHaarMatrix(size=4):
+def make_haar_matrix(size=4):
     if not np.log2(size).is_integer():
         raise ValueError('makeHaarMatrix: input must be power of 2 (%d).' % size)
 
@@ -36,7 +36,7 @@ def makeHaarMatrix(size=4):
     return H
 
 #Make random basis until it succeeds.
-def makeRandomBasis(size=4):
+def make_random_basis(size=4):
     BP = np.random.rand(size,size)
     BN = orth(BP)
     if (BN.shape[1] != size):
@@ -55,7 +55,7 @@ http://nbviewer.jupyter.org/github/sukhbinder/Notebooks/blob/master/Karhunen%20L
 https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.eig.html
 https://docs.scipy.org/doc/numpy/reference/generated/numpy.cov.html
 """
-def makeKLTBasis(I, size=4):
+def make_klt_basis(I, size=4):
     Ishape = I.shape
     #Get size x whatever samples.
     colSamples = np.reshape(I, (size, -1), order='F')
@@ -74,7 +74,7 @@ def makeKLTBasis(I, size=4):
     return vecsorted.T
 
 
-def makeDCTMatrix(size=4):
+def make_dct_matrix(size=4):
     D = np.zeros((size, size))
     x = np.arange(size)
     D[0,:] = np.sqrt(1/size)
@@ -83,5 +83,5 @@ def makeDCTMatrix(size=4):
     return D
 
 # For completeness
-def makeStandardMatrix(size=4):
+def make_standard_matrix(size=4):
     return np.eye(size)
