@@ -10,6 +10,8 @@ custom colormaps.
 import matplotlib.pyplot as plt
 import numpy as np
 import skimage.color as color
+# from mpl_toolkits.mplot3d import Axes3D 
+from matplotlib import cm # all the colormaps...
 
 
 def vis_rgb_cube(I, numpoints=5000, fixaxis=True):
@@ -240,3 +242,25 @@ def lab_uniform(lyst):
     # Give every one the average luminance.
     clyst_lab[...,0] = np.mean(clyst_lab[...,0].ravel())
     return color.lab2rgb(clyst_lab).squeeze()
+
+
+def vis_surface(Z):
+    '''
+    vis_surface(Z): Simple function to visualize an image as a surface.
+    '''
+    fig = plt.figure(fig_size=(4,4))
+    ax = fig.gca(projection='3d')
+
+    # Make data.
+    X = np.arange(Z.shape[0])
+    Y = np.arange(Z.shape[1])
+    X, Y = np.meshgrid(X, Y)
+
+    # Plot the surface.
+    surf = ax.plot_surface(X, Y, Z, cmap=cm.coolwarm,
+                           linewidth=0, antialiased=False)
+
+    # Add a color bar which maps values to colors.
+    fig.colorbar(surf, shrink=0.5, aspect=5)
+
+    plt.show()

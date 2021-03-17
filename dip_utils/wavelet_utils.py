@@ -5,6 +5,7 @@ DIP
 Utilities for Haar wavelet decomposition.
 """
 
+import matplotlib.pyplot as plt
 import numpy as np
 from scipy.linalg import orth
 
@@ -85,3 +86,26 @@ def make_dct_matrix(size=4):
 # For completeness
 def make_standard_matrix(size=4):
     return np.eye(size)
+
+
+# Some visualizations related to wavelets.
+def vis_blocks(H, ax = None):
+    '''
+    vis_blocks(H, ax = None): given the transform matrix H, show a grid of all outer products,
+    basically the block basis set. I don't check for orthonormality, which is 
+    required for an actual basis set. Here I just visualize. ax can be provided if desired.
+    '''
+    sh = H.shape[0]
+    
+    if ax is None:
+        f, ax = plt.subplots(sh, sh, figsize=(5,5))
+    
+    for i in range(sh):
+        for j in range(sh):
+            #Construct that basis and display it
+            Bij = np.outer(H[i, :], H[j, :])
+            ax[i][j].imshow(Bij, cmap='gray', vmin=Bij.min(), vmax=Bij.max())
+            ax[i][j].axes.get_xaxis().set_visible(False)
+            ax[i][j].axes.get_yaxis().set_visible(False)
+    plt.tight_layout()
+    
