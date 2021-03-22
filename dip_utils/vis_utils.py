@@ -248,7 +248,7 @@ def vis_surface(Z):
     '''
     vis_surface(Z): Simple function to visualize an image as a surface.
     '''
-    fig = plt.figure(fig_size=(4,4))
+    fig = plt.figure(figsize=(4,4))
     ax = fig.gca(projection='3d')
 
     # Make data.
