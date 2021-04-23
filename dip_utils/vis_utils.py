@@ -186,6 +186,22 @@ def vis_ybr_cube(I, numpoints = 5000):
     ax.set_ylabel('yellow->blue (Cb)')
     ax.set_zlabel('cyan->red (Cr)')
     
+
+def vis_image(I, figsize=(4,3), title='Image', show_ticks = True, **kwargs):
+    '''
+    vis_image(I, figsize=(4,3), title='Image', show_ticks = True, **kwargs): 
+    plot an image. Very simple, but save a little typing.
+    '''
+    f, ax = plt.subplots(1,1, figsize=figsize)
+    ax.imshow(I, **kwargs)
+    ax.set_title(title)
+    
+    if not show_ticks:
+        ax.get_xaxis().set_visible(False);
+        ax.get_yaxis().set_visible(False);
+    
+    plt.tight_layout()
+
     
 def vis_hists(I, bins = 256):
     '''
@@ -252,8 +268,8 @@ def vis_surface(Z):
     ax = fig.gca(projection='3d')
 
     # Make data.
-    X = np.arange(Z.shape[0])
-    Y = np.arange(Z.shape[1])
+    X = np.arange(Z.shape[1])
+    Y = np.arange(Z.shape[0])
     X, Y = np.meshgrid(X, Y)
 
     # Plot the surface.
