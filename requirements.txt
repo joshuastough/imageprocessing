@@ -230,7 +230,6 @@ tensorflow-estimator==2.3.0
 termcolor==1.1.0
 terminado==0.8.3
 testpath==0.4.4
-tf-keras-contrib==2.0.8
 threadpoolctl==2.1.0
 tifffile==2020.6.3
 toml==0.10.1
