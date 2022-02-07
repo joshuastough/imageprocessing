@@ -5,7 +5,7 @@ Imaging is everywhere! In this text, we will cover broadly the acquisition, proc
 
 ***This book is still under construction. But the interactive visualizations work in binder without a time-consuming local install! Come check it out below!***
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/joshuastough/imageprocessing/HEAD)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/joshuastough/imageprocessing/HEAD?filepath=TOC.ipynb)
 
 - [Creating a private fork of this project](private_fork_instructions.md)
 - Installing a local virtual environment supporting this textbook
