@@ -282,12 +282,14 @@ def lab_uniform(lyst):
     return color.lab2rgb(clyst_lab).squeeze()
 
 
+# Thanks: https://matplotlib.org/3.1.0/gallery/mplot3d/surface3d.html
 def vis_surface(Z):
     '''
     vis_surface(Z): Simple function to visualize an image as a surface.
     '''
     fig = plt.figure(figsize=(4,4))
-    ax = fig.gca(projection='3d')
+    # ax = fig.gca(projection='3d')
+    ax = fig.add_subplot(111, projection='3d')
 
     # Make data.
     X = np.arange(Z.shape[1])
