@@ -1,2 +1,16 @@
 .ipynb_checkpoints/
 __pycache__/
+.vscode/
+*.pyc
+.DS_Store
+env/
+venv/
+env_*/
+.idea/
+*.iml
+*.log
+*.sqlite3
+__pypackages__/
+*.db
+*.egg/
+*.egg-info/

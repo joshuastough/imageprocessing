@@ -1,0 +1,23 @@
+name: dip26
+channels:
+  - pytorch
+  - nvidia   # Include this only if you have an NVIDIA GPU
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.12
+  - numpy
+  - scipy
+  - pandas
+  - scikit-learn
+  - scikit-image>=0.26.0
+  - matplotlib
+  - ipympl               # Vital for interactive plots (using %matplotlib ipympl)
+  - jupyterlab
+  - ipywidgets           # Required for interactive sliders/UI in notebooks
+  - pytorch>=2.7.0       # Latest stable as of early 2026
+  - torchvision>=0.22.0
+  - pip
+  - pip:
+    - opencv-python      # Often useful for additional image processing tasks
+
