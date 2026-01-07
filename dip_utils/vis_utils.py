@@ -13,6 +13,11 @@ import skimage.color as color
 # from mpl_toolkits.mplot3d import Axes3D 
 from matplotlib import cm # all the colormaps...
 
+from matplotlib import animation
+from IPython.display import HTML, Image
+import cv2
+import os
+
 
 def vis_rgb_cube(I, numpoints=5000, fixaxis=True):
     '''
@@ -304,3 +309,79 @@ def vis_surface(Z):
     fig.colorbar(surf, shrink=0.5, aspect=5)
 
     plt.show()
+
+
+def loadvideo(filename: str) -> np.ndarray:
+    """Loads a video from a file.
+    reference: https://opencv.org/blog/reading-and-writing-videos-using-opencv/
+    Args:
+        filename (str): filename of video
+    Returns:
+        A np.ndarray with dimensions (channels=3, frames, height, width). The
+        values will be uint8's ranging from 0 to 255.
+    Raises:
+        FileNotFoundError: Could not find `filename`
+        ValueError: An error occurred while reading the video
+    """
+
+    if not os.path.exists(filename):
+        raise FileNotFoundError(filename)
+    capture = cv2.VideoCapture(filename)
+
+    frame_count = int(capture.get(cv2.CAP_PROP_FRAME_COUNT))
+    frame_width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
+    frame_height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
+
+    v = np.zeros((frame_count, frame_height, frame_width, 3), np.uint8)
+
+    for count in range(frame_count):
+        ret, frame = capture.read()
+        if not ret:
+            raise ValueError("Failed to load frame #{} of {}.".format(count, filename))
+
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        v[count, :, :] = frame
+
+    # v = v.transpose((3, 0, 1, 2))
+
+    return v
+
+def makeVideo(arr, cmap=None):
+    '''
+    makeVideo: given a 3 or 4D array (time x h x w [x [1 or 3]]), returns an HTML animation 
+    of array for viewing in a notebook for example. Cell could say something like:
+
+    %%capture
+    # You want to capture the output when the actual call is made. 
+    vid = makeVideo(arr, cmap='gray')
+
+    with the following cell just
+
+    vid
+
+    '''
+    
+    if len(arr.shape) == 4 and arr.shape[-1] == 1: # one channel, otherwise imshow gets confused
+        arr = arr.squeeze()
+        print('New arr shape {}.'.format(arr.shape))
+    
+    f, ax = plt.subplots(1,1, figsize=(6,4))
+    dispArtist = ax.imshow(arr[0,...], interpolation=None, cmap=cmap)
+    
+    def updateFig(i):
+        # global dispArtist, arr # not sure why I don't need these: 
+        # See: https://www.geeksforgeeks.org/global-local-variables-python/
+        if i >= arr.shape[0]:
+            i = 0
+
+        dispArtist.set_array(arr[i,...])
+        return (dispArtist, )
+    
+    ani = animation.FuncAnimation(f, updateFig, interval=50, # 50 is 20fps...#2000/arr.shape[0], 
+                                  frames = arr.shape[0], blit = True, repeat = False)
+    
+    # https://matplotlib.org/api/_as_gen/matplotlib.animation.FuncAnimation.html
+    # https://stackoverflow.com/questions/16732379/stop-start-pause-in-python-matplotlib-animation
+    # https://stackoverflow.com/questions/43445103/inline-animations-in-jupyter
+    # HTML(ani.to_html5_video()) didn't see a big difference in quality
+    return HTML(ani.to_jshtml()) # gives a nice button interface for pause and playback.
