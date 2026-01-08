@@ -20,4 +20,5 @@ dependencies:
   - pip
   - pip:
     - opencv-python      # Often useful for additional image processing tasks
+    - xgboost           # For gradient boosting models
 
