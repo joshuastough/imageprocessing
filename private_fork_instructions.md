@@ -60,7 +60,7 @@ git fetch upstream
 git rebase upstream/main
 ```
 > can lead lead to a lot of failed merges. 
-> My recommendation is that you check out only the new matrial I provide. For example, if I tell you I've committed a new module/folder on `Tomography` that you should pull into your codebase, you can use `checkout` to get just that from my repo.
+> My recommendation is that you check out only the new material I provide. For example, if I tell you I've committed a new module/folder on `Tomography` that you should pull into your codebase, you can use `checkout` to get just that from my repo.
 ```
 git fetch upstream
 git checkout upstream/main Tomography
