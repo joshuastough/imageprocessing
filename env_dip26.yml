@@ -19,6 +19,7 @@ dependencies:
   - ipywidgets           # Required for interactive sliders/UI in notebooks
   - pytorch>=2.7.0       # Latest stable as of early 2026
   - torchvision>=0.22.0
+  - pandoc
   - pip
   - pip:
     - opencv-python      # Often useful for additional image processing tasks
